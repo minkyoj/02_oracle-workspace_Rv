@@ -63,3 +63,60 @@ FROM EMPLOYEE;
 SELECT EMP_ID, EMP_NAME, SALARY, '원' AS "단위"
 FROM EMPLOYEE;
 
+-- < 연결 연산자 : || >
+
+-- 사번, 이름, 급여를 하나의 컬럼으로 조회
+SELECT EMP_ID || EMP_NAME || SALARY
+FROM EMPLOYEE;
+
+-- 컬럼값과 리터럴 연결
+-- XXX의 월급은 XXX원 입니다. => 별칭 : 급여정보
+SELECT EMP_NAME || '의 월급은' || SALARY || '원 입니다.' AS "급여정보"
+FROM EMPLOYEE;
+-------------------------------
+
+-- EMPLOYEE 테이블의 직급코드 조회
+SELECT JOB_CODE
+FROM EMPLOYEE;
+
+-- EMPLOYEE 테이블의 직급코드 조회
+SELECT DISTINCT JOB_CODE
+FROM EMPLOYEE; -- 중복 제거 돼서 7행만 조회됌.
+
+-- 사원들이 어떤 부서에 속해있는지 궁금하다.
+SELECT DISTINCT DEPT_CODE
+FROM EMPLOYEE; -- NULL : 아직 부서배치 안된사람
+
+SELECT DISTINCT JOB_CODE, DEPT_CODE
+FROM EMPLOYEE;
+
+-- <WHERE 절>
+
+-- EMPLOYEE 테이블에서 부서코드가 'D9'인 사원들만 조회 (이때, 모든 컬럼 조회)
+SELECT *
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D9';
+
+-- EMPLOYEE 테이블에서 부서코드가 'D1'인 사원들의 사원명, 급여, 부서코드만 조회
+SELECT EMP_NAME, SALARY, DEPT_CODE 
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D1';
+
+-- 부서코드가 D1이 아닌 사원들의 사번, 사원명, 부서코드 조회
+SELECT EMP_ID, EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+--WHERE DEPT_CODE != 'D1';
+--WHERE DEPT_CODE ^= 'D1';
+WHERE DEPT_CODE <> 'D1';
+
+-- 급여가 400만원 이상인 사원들의 사원명, 부서코드, 급여 조회
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY >= 4000000;
+
+SELECT * FROM EMPLOYEE;
+
+-- EMPLOYEE에서 재직중(ENT_YN 컬럼값이 'N')인 사원들의 사번, 이름, 입사일
+SELECT EMP_ID, EMP_NAME, HIRE_DATE
+FROM EMPLOYEE
+WHERE ENT_YN = 'N';
